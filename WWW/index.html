@@ -17,6 +17,7 @@
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+		<!-- Search Bar-->
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 		<!-- Web Fonts  -->
@@ -45,6 +46,7 @@
 		<!-- Head Libs -->
 		<script src="assets/vendor/modernizr/modernizr.js"></script>
 
+		<!--Search Bar-->
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
@@ -56,7 +58,7 @@
 			<header class="header">
 				<div class="logo-container">
 					<a href="../" class="logo">
-						<img src="assets/images/WNE_Logo.jpg" height="45" width="300" alt="" />
+						<img src="assets/images/WNE_Logo.jpg" height="45" width="200" alt="" />
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
@@ -253,6 +255,11 @@
 												</a>
 											</li>
 											<li>
+												<a href="My_movies.html">
+														My Movies
+												</a>
+												</li>
+											<li>
 												<a href="pages-timeline.html">
 													 Timeline
 												</a>
@@ -271,23 +278,23 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a href="pages-signup.html">
+												<a href="list_of_movies.html">
 													 List of Movies
 												</a>
 											</li>
 											<li>
-												<a href="pages-signin.html">
+												<a href="top1000.html">
 													 Top 1000
 												</a>
 											</li>
 											<li>
-												<a href="pages-timeline.html">
+												<a href="top100genres.html">
 													 Top 100 by Genre
 												</a>
 											</li>
 											<li>
-												<a href="pages-media-gallery.html">
-													 Top 100 by Country
+												<a href="top100year.html">
+													 Top 100 by Year
 												</a>
 											</li>
 										</ul>
@@ -305,7 +312,7 @@
 														<a>...</a>
 														<ul class="nav nav-children" aria-hidden="true">
 															<li>
-																<a>Graphs</a>
+																<a href="top100genre.html">Graphs</a>
 															</li>
 															<li>
 																<a>Tables</a>
@@ -343,29 +350,6 @@
 														</ul>
 													</li>
 												</ul>	
-											</li>
-										</ul>
-									</li>
-									<li class="nav-parent">
-										<a>
-											<i class="fa fa-map-marker" aria-hidden="true"></i>
-											<span>Maps</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a href="maps-google-maps.html">
-													 Basic
-												</a>
-											</li>
-											<li>
-												<a href="maps-google-maps-builder.html">
-													 Map Builder
-												</a>
-											</li>
-											<li>
-												<a href="maps-vector.html">
-													 Vector
-												</a>
 											</li>
 										</ul>
 									</li>
@@ -382,10 +366,10 @@
 														<a>Authors</a>
 														<ul class="nav nav-children" aria-hidden="true">
 															<li>
-																<a>Korneliusz Krysiak</a>
+																<a href="https://www.linkedin.com/in/korneliusz-krysiak-a6348575/?ori…">Korneliusz Krysiak</a>
 															</li>
 															<li>
-																<a>Michał Szałański</a>
+																<a href="https://www.linkedin.com/in/michał-szałański-277b26155/?originalSubdomain=pl">Michał Szałański</a>
 															</li>
 														</ul>
 													</li>
@@ -395,7 +379,7 @@
 														<a>Bootstrap Theme</a>
 														<ul class="nav nav-children" aria-hidden="true">
 															<li>
-																<a>Github</a>
+																<a href="https://github.com/puikinsh/octopus">Github</a>
 															</li>
 														</ul>
 													</li>
@@ -405,7 +389,7 @@
 														<a>Database</a>
 														<ul class="nav nav-children" aria-hidden="true">
 															<li>
-																<a>Kaggle</a>
+																<a href="https://www.kaggle.com/rounakbanik/the-movies-dataset">Kaggle</a>
 															</li>
 														</ul>
 													</li>
@@ -824,65 +808,15 @@
 				<div class="nano">
 					<div class="nano-content">
 						<a href="#" class="mobile-close visible-xs">
-							Collapse <i class="fa fa-chevron-right"></i>
+							 <i class="fa fa-chevron-right"></i>
 						</a>
 			
 						<div class="sidebar-right-wrapper">
 			
 							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
+								<h6>Callendar</h6>
 								<div data-plugin-datepicker data-plugin-skin="dark" ></div>
-			
-								<ul>
-									<li>
-										<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
 							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
 						</div>
 					</div>
 				</div>
