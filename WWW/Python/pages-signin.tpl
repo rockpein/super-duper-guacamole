@@ -47,7 +47,7 @@
 						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
 					</div>
 					<div class="panel-body">
-						<form action="index.html" method="post">
+						<form action="/SignIn" method="post">
 							<div class="form-group mb-lg">
 								<label>Username</label>
 								<div class="input-group input-group-icon">
@@ -84,8 +84,8 @@
 								</div>
 								<div class="row">
 									<div class="center text-right">
-										<button type="submit" class="btn btn-primary hidden-xs">Sign Up</button>
-										<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign Up</button>
+										<button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
+										<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
 									</div>
 								</div>
 							</div>
