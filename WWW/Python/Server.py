@@ -7,8 +7,14 @@ import random
 import string
 import logging
 import logging.handlers
+import sqlite3
+import hashlib
 
 app = Bottle()
+
+# Connect to databases
+connectionUsers = sqlite3.connect("usersDatabase.db")
+cUsers = connectionUsers.cursor()
 
 @app.route('/assets/:path#.+#', name='assets')
 def static(path):
@@ -130,12 +136,23 @@ def do_login():
         redirect('/')
     else:
         redirect('/SignIn')
+        
 
 def check_login(username,password):
-    users={"admin":{"name":"python", "password":"datascience", "email":"pythonsql@gmail.com", "loggedIn":False,  "randStr":"", "lastSeen":0}} 
-    if username == users["admin"]["name"] and password == users["admin"]["password"]:
+    # Login is "admin", password is "password"
+    # To-do: catch exceptions (wrong password, wrong username etc.)
+    
+    cUsers.execute("SELECT password_hash from users WHERE username =?", (username,))
+    query = cUsers.fetchone()[0]
+    print(query)
+    
+    passwordHash = hashlib.md5(password.encode("utf8")).hexdigest() 
+    print(passwordHash)
+
+    if passwordHash == query:
         return 'ok'
     else:
         return 'not valid'
+
 
 app.run(host='localhost', port=8585, debug=True, reloader=True)
