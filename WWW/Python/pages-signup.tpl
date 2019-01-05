@@ -47,7 +47,7 @@
 						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign Up</h2>
 					</div>
 					<div class="panel-body">
-						<form>
+						<form action="/SignUp" method="post">
 							<div class="form-group mb-lg">
 								<label>Name</label>
 								<input name="name" type="text" class="form-control input-lg" />
