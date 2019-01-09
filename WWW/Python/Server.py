@@ -15,6 +15,8 @@ app = Bottle()
 # Connecting to databases
 connectionUsers = sqlite3.connect("usersDatabase.db")
 cUsers = connectionUsers.cursor()
+connectionMovies = sqlite3.connect("main_database.db")
+cMovies = connectionMovies.cursor()
 
 @app.route('/assets/:path#.+#', name='assets')
 def static(path):
@@ -46,11 +48,17 @@ def certificate():
 
 @app.route('/list_of_movies')
 def listofmovies():
-    return template('list_of_movies')
+    cMovies.execute("SELECT title, genres, vote_average, vote_count, adult FROM movie_database_c LIMIT 5000")
+    result = cMovies.fetchall()
+    output = template('list_of_movies', rows=result)
+    return output
 
 @app.route('/Top1000')
 def top1000():
-    return template('top1000')
+    cMovies.execute("SELECT title, genres, vote_average, vote_count, adult FROM movie_database_c WHERE vote_count >500 ORDER BY vote_average DESC LIMIT 1000")
+    result = cMovies.fetchall()
+    output2 = template('top1000', rows=result)
+    return output2
 
 @app.route('/Top100_by_genre')
 def top100g():
@@ -72,6 +80,7 @@ def lock():
 def recovery():
     return template('pages-recover-password')
 
+#######SINGING IN##############################
 #Signing In 
 @app.route('/SignIn', method='POST')
 def do_login():
@@ -98,6 +107,7 @@ def check_login(username,password):
     else:
         return 'not valid'
 
+###########SIGNING UP#########################
 @app.route('/SignUp', method='POST')
 def registerUser():
     # To-do: catch exceptions (user registered etc.)
