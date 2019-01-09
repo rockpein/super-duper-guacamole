@@ -431,11 +431,12 @@
 								<table class="table table-bordered table-striped mb-none" id="datatable-default">
 									<thead>
 										<tr>
-											<th>Title</th>
-											<th>Genre</th>
-											<th>Rating</th>
-											<th>Votes</th>
-											<th>Adults</th>
+											<th class="center">Title</th>
+											<th class="center">Genre</th>
+											<th class="center">Rating</th>
+											<th class="center">Votes</th>
+											<th class="center">Release Date</th>
+											<th class="center">Adults</th>
 										</tr>
 									</thead>
 									<tbody>

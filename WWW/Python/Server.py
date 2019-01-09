@@ -48,25 +48,58 @@ def certificate():
 
 @app.route('/list_of_movies')
 def listofmovies():
-    cMovies.execute("SELECT title, genres, vote_average, vote_count, adult FROM movie_database_c LIMIT 5000")
+    cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c LIMIT 5000")
     result = cMovies.fetchall()
     output = template('list_of_movies', rows=result)
     return output
 
 @app.route('/Top1000')
 def top1000():
-    cMovies.execute("SELECT title, genres, vote_average, vote_count, adult FROM movie_database_c WHERE vote_count >500 ORDER BY vote_average DESC LIMIT 1000")
+    cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE vote_count >500 ORDER BY vote_average DESC LIMIT 1000")
     result = cMovies.fetchall()
     output2 = template('top1000', rows=result)
     return output2
 
-@app.route('/Top100_by_genre')
-def top100g():
-    return template('top100genre')
-
 @app.route('/Top100_by_year')
 def top100y():
-    return template('top100year')
+    
+    release_year = request.query.year
+    if release_year == "":
+
+        result = [30,40,50,60,70,80,90,"00",10]
+        output = template('years_main_page', rows=result)
+        return output
+    else:
+        if release_year == "00" or release_year =="10":
+            release_year = "20"+release_year
+        else:
+            release_year = "19"+release_year
+
+
+        cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE CAST(SUBSTR(release_date,1,4) as int) >= (?) and CAST(SUBSTR(release_date,1,4) as int) < (?)  and vote_count > 100 ORDER BY vote_average DESC LIMIT 100", (int(release_year), (int(release_year)+ 10)))
+        result = cMovies.fetchall()
+        output = template('top100year', rows=result,date=release_year + " - " + str(int(release_year)+ 9))
+        return output
+
+@app.route('/Top100_by_genre')
+def top100g():
+
+    genre = request.query.genre
+    if genre == "":
+
+        cMovies.execute("SELECT DISTINCT genres FROM movie_database_c")
+        query = cMovies.fetchall()
+        result = []
+        for tup in query:
+            result.append(tup[0])
+        result.sort()
+        output = template('genres_main_page', rows=result)
+        return output
+    else:
+        cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE genres = (?) and vote_count>1000 ORDER BY vote_average DESC LIMIT 100", (genre,))
+        result = cMovies.fetchall()
+        output = template('top100genre', rows=result)
+        return output
 
 @app.route('/User_Profile')
 def user():
