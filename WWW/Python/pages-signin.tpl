@@ -39,7 +39,7 @@
 		<section class="body-sign">
 			<div class="center-sign">
 				<a href="/" class="logo pull-left">
-					<img src="assets/images/WNE_Logo.jpg" height="70" width="300" alt="" />
+					<img src="assets/images/WNE.png" height="80" alt="" />
 				</a>
 
 				<div class="panel panel-sign">

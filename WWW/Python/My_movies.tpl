@@ -1,7 +1,7 @@
 % rebase('base.tpl', title='Python')
 <section role="main" class="content-body">
 	<header class="page-header">
-		<h2>My movies</h2>
+		<h2>My Watchlist</h2>
 	
 		<div class="right-wrapper pull-right">
 			<ol class="breadcrumbs">
@@ -11,7 +11,7 @@
 					</a>
 				</li>
 				<li><span>User</span></li>
-				<li><span>My Wishlist</span></li>
+				<li><span>My Watchlist</span></li>
 			</ol>
 	
 			<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>

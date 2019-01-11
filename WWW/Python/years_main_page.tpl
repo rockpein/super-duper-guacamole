@@ -2,17 +2,17 @@
 	
 				<section role="main" class="content-body">
 					<header class="page-header">
-						<h2>Top 100 Movies by Genre</h2>
+						<h2>Top 100 Movies by Year</h2>
 					
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
 								<li>
 									<a href="/">
-										<i class="fa fa-home"></i>
+										<i class="fa fa-calendar"></i>
 									</a>
 								</li>
 								<li><span>Pages</span></li>
-								<li><span>Top 100 By Genre</span></li>
+								<li><span>Top 100 By Year</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
@@ -33,7 +33,7 @@
 											<div class="widget-summary">
 												<div class="widget-summary-col widget-summary-col-icon">
 													<div class="summary-icon bg-quartenary">
-														<i class="fa fa-user"></i>
+														<i class="fa fa-calendar"></i>
 													</div>
 												</div>
 												<div class="widget-summary-col">

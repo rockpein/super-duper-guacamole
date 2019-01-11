@@ -63,8 +63,8 @@
 			<!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
-					<a href="../" class="logo">
-						<img src="assets/images/WNE_Logo.jpg" height="45" width="200" alt="" />
+					<a href="../" class="logo" style="margin: 0px;">
+						<img src="assets/images/WNE.png" height="60"  alt="" />
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
@@ -88,13 +88,13 @@
 					<ul class="notifications">
 						<li>
 							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-								<i class="fa fa-tasks"></i>
-								<span class="badge">3</span>
+								<i class="fa fa-bell"></i>
+								<span class="badge">2</span>
 							</a>
 			
 							<div class="dropdown-menu notification-menu large">
 								<div class="notification-title">
-									<span class="pull-right label label-default">3</span>
+									<span class="pull-right label label-default">2</span>
 									Actions
 								</div>
 			
@@ -119,71 +119,12 @@
 												<div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div>
 											</div>
 										</li>
-			
-										<li>
-											<p class="clearfix mb-xs">
-												<span class="message pull-left">Average rate</span>
-												<span class="message pull-right text-dark">7.6</span>
-											</p>
-											<div class="progress progress-xs light mb-xs">
-												<div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 76%;"></div>
-											</div>
-										</li>
+		
 									</ul>
 								</div>
 							</div>
 						</li>
-						<li>
-							<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-								<i class="fa fa-bell"></i>
-								<span class="badge">3</span>
-							</a>
-			
-							<div class="dropdown-menu notification-menu">
-								<div class="notification-title">
-									<span class="pull-right label label-default">3</span>
-									Alerts
-								</div>
-			
-								<div class="content">
-									<ul>
-										<li>
-											<a href="#" class="clearfix">
-												<div class="image">
-													<i class="fa fa-thumbs-down bg-danger"></i>
-												</div>
-												<span class="title">Server is Down!</span>
-												<span class="message">Just now</span>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="clearfix">
-												<div class="image">
-													<i class="fa fa-lock bg-warning"></i>
-												</div>
-												<span class="title">User Locked</span>
-												<span class="message">15 minutes ago</span>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="clearfix">
-												<div class="image">
-													<i class="fa fa-signal bg-success"></i>
-												</div>
-												<span class="title">Connection Restaured</span>
-												<span class="message">10/10/2014</span>
-											</a>
-										</li>
-									</ul>
-			
-									<hr />
-			
-									<div class="text-right">
-										<a href="#" class="view-more">View All</a>
-									</div>
-								</div>
-							</div>
-						</li>
+						
 					</ul>
 			
 					<span class="separator"></span>
@@ -195,7 +136,15 @@
 							</figure>
 							<div class="profile-info">
 								<span class="name">Intro to Python&SQL</span>
-								<span class="role">Data Science - Admin</span>
+								%from bottle import Bottle, request
+								%username_cookie = request.get_cookie("account", secret="guacamole")
+								%if username_cookie == "":
+									<span class="role">Data Science</span>
+								%else:
+									<span class="role">Current user: {{username_cookie}}</span>
+								%end
+								
+
 							</div>
 			
 							<i class="fa custom-caret"></i>
@@ -207,11 +156,9 @@
 								<li>
 									<a role="menuitem" tabindex="-1" href="/User_Profile"><i class="fa fa-user"></i> My Profile</a>
 								</li>
+								
 								<li>
-									<a role="menuitem" tabindex="-1" href="/Lock"><i class="fa fa-lock"></i> Lock Screen</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="/SignIn"><i class="fa fa-power-off"></i> Logout</a>
+									<a role="menuitem" tabindex="-1" href="/SignIn?logout=True"><i class="fa fa-power-off"></i> Logout</a>
 								</li>
 							</ul>
 						</div>
@@ -238,12 +185,7 @@
 						<div class="nano-content">
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
-									<li class="nav-active">
-										<a href="/">
-											<i class="fa fa-home" aria-hidden="true"></i>
-											<span>Menu</span>
-										</a>
-									</li>
+									
 									<li class="nav-parent">
 										<a>
 											<i class="fa fa-tasks" aria-hidden="true"></i>
@@ -262,13 +204,7 @@
 											</li>
 											<li>
 												<a href="/myMovies">
-														My Movies
-												</a>
-											</li>
-								
-											<li>
-												<a href="/Certificate">
-													 Certificate
+														My Watchlist
 												</a>
 											</li>
 										</ul>
@@ -276,17 +212,17 @@
 									<li class="nav-parent">
 										<a>
 											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>Pages</span>
+											<span>Movies</span>
 										</a>
 										<ul class="nav nav-children">
 											<li>
 												<a href="/list_of_movies">
-													 List of Movies
+													All Movies
 												</a>
 											</li>
 											<li>
 												<a href="/Top1000">
-													 Top 1000
+													 Top 1000 Movies
 												</a>
 											</li>
 											<li>

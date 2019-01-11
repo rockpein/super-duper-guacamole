@@ -30,6 +30,10 @@ def signup():
 
 @app.route('/SignIn')
 def signin():
+    logout = request.query.logout
+    if logout != "":
+        response.delete_cookie("account")
+        redirect('/')
     return template('pages-signin')
 
 @app.route('/myMovies')
@@ -58,23 +62,12 @@ def mymovies():
     output = template('My_movies', rows=result)
     return output
 
-
-@app.route('/Timeline')
-def timeline():
-    return template('pages-timeline')
-
-@app.route('/Certificate')
-def certificate():
-    return template('pages-invoice')
-
 @app.route('/list_of_movies')
 def listofmovies():
     c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c LIMIT 5000")
     result = c.fetchall()
     output = template('list_of_movies', rows=result)
     return output
-
-
 
 @app.route('/Top1000')
 def top1000():
@@ -128,17 +121,21 @@ def top100g():
 def user():
     return template('pages-user-profile')
 
-@app.route('/Lock')
-def lock():
-    return template('pages-lock-screen')
-
-@app.route('/Recovery')
-def recovery():
-    return template('pages-recover-password')
-
 @app.route('/Unsuccessful')
 def incorrect():
     return template('unsuccessful_singin')
+
+@app.route('/Movie')
+def single_movie():
+    movieTitle = request.query.movie_title
+    if movieTitle == "":
+        redirect('/')
+    else:
+        #To-do: size of letters
+        c.execute("SELECT poster_path, tagline, title, overview, revenue, budget, vote_average, vote_count, release_date, genres, runtime, [status] FROM movie_database_c WHERE title = (?) LIMIT 1", (movieTitle, ))
+        result = c.fetchone()
+        output = template('single_movie', data = result)
+        return output
 
 #######SINGING IN##############################
 #Signing In 
