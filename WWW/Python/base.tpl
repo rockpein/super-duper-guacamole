@@ -33,9 +33,15 @@
 		<link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 		<link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
 		<link rel="stylesheet" href="assets/vendor/morris/morris.css" />
+		
+		<!-- dodane -->
+		
+		<link rel="stylesheet" href="assets/vendor/select2/select2.css" />
+		<link rel="stylesheet" href="assets/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="assets/stylesheets/theme.css" />
+		<link rel="stylesheet" href="assets/stylesheets/my_css.css" />
 
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
@@ -258,12 +264,8 @@
 												<a href="/myMovies">
 														My Movies
 												</a>
-												</li>
-											<li>
-												<a href="/Timeline">
-													 Timeline
-												</a>
 											</li>
+								
 											<li>
 												<a href="/Certificate">
 													 Certificate
@@ -296,60 +298,6 @@
 												<a href="/Top100_by_year">
 													 Top 100 by Year
 												</a>
-											</li>
-										</ul>
-									</li>
-									<li class="nav-parent">
-										<a>
-											<i class="fa fa-align-left" aria-hidden="true"></i>
-											<span>Insights</span>
-										</a>
-										<ul class="nav nav-children" aria-hidden="true">
-											<li class="nav-parent" aria-hidden="true">
-												<a>Statistics</a>
-												<ul class="nav nav-children" aria-hidden="true">
-													<li class="nav-parent" aria-hidden="true">
-														<a>...</a>
-														<ul class="nav nav-children" aria-hidden="true">
-															<li>
-																<a>Graphs</a>
-															</li>
-															<li>
-																<a>Tables</a>
-															</li>
-														</ul>
-													</li>
-												</ul>	
-											<li class="nav-parent" aria-hidden="true">
-												<a>Statistics</a>
-												<ul class="nav nav-children" aria-hidden="true">
-													<li class="nav-parent" aria-hidden="true">
-														<a>...</a>
-														<ul class="nav nav-children" aria-hidden="true">
-															<li>
-																<a>Graphs</a>
-															</li>
-															<li>
-																<a>Tables</a>
-															</li>
-														</ul>
-													</li>
-												</ul>	
-											<li class="nav-parent" aria-hidden="true">
-												<a>Statistics</a>
-												<ul class="nav nav-children" aria-hidden="true">
-													<li class="nav-parent" aria-hidden="true">
-														<a>...</a>
-														<ul class="nav nav-children" aria-hidden="true">
-															<li>
-																<a>Graphs</a>
-															</li>
-															<li>
-																<a>Tables</a>
-															</li>
-														</ul>
-													</li>
-												</ul>	
 											</li>
 										</ul>
 									</li>
@@ -403,406 +351,11 @@
 					</div>
 				</aside>
 				<!-- end: sidebar -->
+				{{!base}}
 
-				<section role="main" class="content-body">
-					<header class="page-header">
-						<h2>Dashboard</h2>
-					
-						<div class="right-wrapper pull-right">
-							<ol class="breadcrumbs">
-								<li>
-									<a href="/">
-										<i class="fa fa-home"></i>
-									</a>
-								</li>
-							</ol>
-					
-							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
-						</div>
-					</header>
 
-					<div class="row">
-							<div class="row" id="search">
-								<form id="search-form" action="" method="POST" enctype="multipart/form-data">
-									<div class="form-group col-xs-9">
-										<input class="form-control" type="text" placeholder="Search" />
-									</div>
-									<div class="form-group col-xs-3">
-										<button type="submit" class="btn btn-block btn-primary">Search</button>
-									</div>
-								</form>
-							</div>
-							<div class="row" id="filter">
-								<form>
-									<div class="form-group col-sm-3 col-xs-6">
-										<select data-filter="make" class="filter-make filter form-control">
-											<option value="">Select Genre</option>
-											<option value="">Adventure</option>
-											<option value="">Romance</option>
-											<option value="">Action</option>
-											<option value="">Comedy</option>
-											<option value="">Drama</option>
-											<option value="">Crime</option>
-										</select>
-									</div>
-									<div class="form-group col-sm-3 col-xs-6">
-										<select data-filter="model" class="filter-model filter form-control">
-											<option value="">For Adults</option>
-											<option value="">Yes</option>
-											<option value="">No</option>
-										</select>
-									</div>
-									<div class="form-group col-sm-3 col-xs-6">
-										<select data-filter="type" class="filter-type filter form-control">
-											<option value="">Rating</option>
-											<option value="">1 - 2 *</option>
-											<option value="">2 - 3 *</option>
-											<option value="">3 - 4 *</option>
-											<option value="">4 - 5 **</option>
-											<option value="">5 - 6 **</option>
-											<option value="">6 - 7 **</option>
-											<option value="">7 - 8 ***</option>
-											<option value="">8 - 9 ***</option>
-											<option value="">9 - 10 ***</option>
-										</select>
-									</div>
-									<div class="form-group col-sm-3 col-xs-6">
-										<select data-filter="price" class="filter-price filter form-control">
-											<option value="">Release Date</option>
-											<option value="">1930-1950</option>
-											<option value="">1950-1970</option>
-											<option value="">1970-1990</option>
-											<option value="">1990-2010</option>
-											<option value="">2010+</option>
-										</select>
-									</div>
-								</form>
-							</div>	
-					
-					<!-- start: page -->
-					<div class="row">
-						<div class="col-md-6 col-lg-12 col-xl-6">
-							<section class="panel">
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-8">
-											<div class="chart-data-selector" id="salesSelectorWrapper">
-												<h2>
-													Watched in:
-													<strong>
-														<select class="form-control" id="salesSelector">
-															<option value="JSOFT Admin" selected>2018</option>
-															<option value="JSOFT Drupal" >2017</option>
-														</select>
-													</strong>
-												</h2>
-
-												<div id="salesSelectorItems" class="chart-data-selector-items mt-sm">
-													<!-- Flot: Sales JSOFT Admin -->
-													<div class="chart chart-sm" data-sales-rel="JSOFT Admin" id="flotDashSales1" class="chart-active"></div>
-													<script>
-
-														var flotDashSales1Data = [{
-														    data: [
-														        ["Jan", 140],
-														        ["Feb", 240],
-														        ["Mar", 190],
-														        ["Apr", 140],
-														        ["May", 180],
-														        ["Jun", 320],
-														        ["Jul", 270],
-														        ["Aug", 180]
-														    ],
-														    color: "#0088cc"
-														}];
-
-														// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
-
-													</script>
-
-													<!-- Flot: Sales JSOFT Drupal -->
-													<div class="chart chart-sm" data-sales-rel="JSOFT Drupal" id="flotDashSales2" class="chart-hidden"></div>
-													<script>
-
-														var flotDashSales2Data = [{
-														    data: [
-														        ["Jan", 240],
-														        ["Feb", 240],
-														        ["Mar", 290],
-														        ["Apr", 540],
-														        ["May", 480],
-														        ["Jun", 220],
-														        ["Jul", 170],
-														        ["Aug", 190]
-														    ],
-														    color: "#2baab1"
-														}];
-
-														// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
-
-													</script>
-
-													<!-- Flot: Sales JSOFT Wordpress -->
-													<div class="chart chart-sm" data-sales-rel="JSOFT Wordpress" id="flotDashSales3" class="chart-hidden"></div>
-													<script>
-
-														var flotDashSales3Data = [{
-														    data: [
-														        ["Jan", 840],
-														        ["Feb", 740],
-														        ["Mar", 690],
-														        ["Apr", 940],
-														        ["May", 1180],
-														        ["Jun", 820],
-														        ["Jul", 570],
-														        ["Aug", 780]
-														    ],
-														    color: "#734ba9"
-														}];
-
-														// See: assets/javascripts/dashboard/examples.dashboard.js for more settings.
-
-													</script>
-												</div>
-
-											</div>
-										</div>
-										<div class="col-lg-4 text-center">
-											<h2 class="panel-title mt-md">Watched Movies Goal</h2>
-											<div class="liquid-meter-wrapper liquid-meter-sm mt-lg">
-												<div class="liquid-meter">
-													<meter min="0" max="100" value="10" id="meterSales"></meter>
-												</div>
-												<div class="liquid-meter-selector" id="meterSalesSel">
-													<a href="#" data-val="25" class="active">Monthly Goal</a>
-													<a href="#" data-val="10">Annual Goal</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-						</div>
-						<div class="col-md-6 col-lg-12 col-xl-6">
-							<div class="row">
-								<div class="col-xl-12">
-									<section class="panel panel-featured-left panel-featured-primary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-primary">
-														<i class="fa fa-life-ring"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Favorite Movie</h4>
-														<div class="info">
-															<strong class="amount">Cloud Atlas</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(view all)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-								<div class="col-xl-12">
-									<section class="panel panel-featured-left panel-featured-quartenary">
-										<div class="panel-body">
-											<div class="widget-summary">
-												<div class="widget-summary-col widget-summary-col-icon">
-													<div class="summary-icon bg-quartenary">
-														<i class="fa fa-user"></i>
-													</div>
-												</div>
-												<div class="widget-summary-col">
-													<div class="summary">
-														<h4 class="title">Favorite Genre</h4>
-														<div class="info">
-															<strong class="amount">Drama</strong>
-														</div>
-													</div>
-													<div class="summary-footer">
-														<a class="text-muted text-uppercase">(view all)</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-6">
-						<section class="panel panel-transparent">
-							<header class="panel-heading">
-								<div class="panel-actions">
-									<a href="#" class="fa fa-caret-down"></a>
-									<a href="#" class="fa fa-times"></a>
-								</div>
-								<h2 class="panel-title">My Stats</h2>
-							</header>
-							<div class="panel-body">
-								<section class="panel">
-									<div class="panel-body">
-										<div class="circular-bar circular-bar-xs m-none mt-xs mr-md pull-right">
-											<div class="circular-bar-chart" data-percent="2000" data-plugin-options='{ "barColor": "#2baab1", "delay": 300, "size": 50, "lineWidth": 4 }'>
-												<strong>Percentage</strong>
-												<label><span class="value">2000</span></label>
-											</div>
-										</div>
-										<div class="h4 text-bold mb-none">2000</div>
-										<p class="text-xs text-muted mb-none">Watched Movies</p>
-									</div>
-								</section>
-								<section class="panel">
-									<div class="panel-body">
-										<div class="circular-bar circular-bar-xs m-none mt-xs mr-md pull-right">
-											<div class="circular-bar-chart" data-percent="500" data-plugin-options='{ "barColor": "#2baab1", "delay": 300, "size": 50, "lineWidth": 4 }'>
-												<strong>Percentage</strong>
-												<label><span class="percent">500</span></label>
-											</div>
-										</div>
-										<div class="h4 text-bold mb-none">500</div>
-										<p class="text-xs text-muted mb-none">Your Wishlist</p>
-									</div>
-								</section>
-								<section class="panel">
-									<div class="panel-body">
-										<div class="circular-bar circular-bar-xs m-none mt-xs mr-md pull-right">
-											<div class="circular-bar-chart" data-percent="76" data-plugin-options='{ "barColor": "#2baab1", "delay": 300, "size": 50, "lineWidth": 4 }'>
-												
-												<label><span class="value">7.6</span></label>
-											</div>
-										</div>
-										<div class="h4 text-bold mb-none">7.6</div>
-										<p class="text-xs text-muted mb-none">Average Rating</p>
-									</div>
-								</section>
-							</div>
-						</section>
-					</div>
-					<div class="row">
-						
-						<div class="col-lg-6 col-md-12">
-							<section class="panel">
-								<header class="panel-heading panel-heading-transparent">
-									<div class="panel-actions">
-										<a href="#" class="fa fa-caret-down"></a>
-										<a href="#" class="fa fa-times"></a>
-									</div>
-
-									<h2 class="panel-title">Recently Watched</h2>
-								</header>
-								<div class="panel-body">
-									<div class="table-responsive">
-										<table class="table table-striped mb-none">
-											<thead>
-												<tr>
-													<th>#</th>
-													<th>Movie</th>
-													<th>Status</th>
-													<th>Rating</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>1</td>
-													<td>costam costam</td>
-													<td><span class="label label-success">Watched</span></td>
-													<td>
-														<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-															<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-																100%
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>2</td>
-													<td>costam costam</td>
-													<td><span class="label label-success">Watched</span></td>
-													<td>
-														<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-															<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-																100%
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>3</td>
-													<td>costam costam</td>
-													<td><span class="label label-warning">Wishlist</span></td>
-													<td>
-														<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-															<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-																60%
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>4</td>
-													<td>costam costam</td>
-													<td><span class="label label-success">Watched</span></td>
-													<td>
-														<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-															<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
-																90%
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>5</td>
-													<td>costam costam</td>
-													<td><span class="label label-warning">Wishlist</span></td>
-													<td>
-														<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-															<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-																45%
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>6</td>
-													<td>costam costam</td>
-													<td><span class="label label-danger">Dropped</span></td>
-													<td>
-														<div class="progress progress-sm progress-half-rounded m-none mt-xs light">
-															<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-																40%
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>7</td>
-													<td>costam costam</td>
-													<td><span class="label label-success">Watched</span></td>
-													<td>
-														<div class="progress progress-sm progress-half-rounded mt-xs light">
-															<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">
-																95%
-															</div>
-														</div>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</section>
-						</div>
-					</div>
 				<!-- end: page -->
-				</section>
-			</div>
+			
 
 			<aside id="sidebar-right" class="sidebar-right">
 				<div class="nano">
@@ -833,6 +386,7 @@
 		<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 		
 		<!-- Specific Page Vendor -->
+		<script src="assets/vendor/select2/select2.js"></script>
 		<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
 		<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
 		<script src="assets/vendor/jquery-appear/jquery.appear.js"></script>
@@ -858,6 +412,9 @@
 		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js"></script>
 		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js"></script>
 		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+		<script src="assets/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+		<script src="assets/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script> 
+		<script src="assets/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script> 
 		
 		<!-- Theme Base, Components and Settings -->
 		<script src="assets/javascripts/theme.js"></script>
@@ -868,8 +425,11 @@
 		<!-- Theme Initialization Files -->
 		<script src="assets/javascripts/theme.init.js"></script>
 
-
 		<!-- Examples -->
 		<script src="assets/javascripts/dashboard/examples.dashboard.js"></script>
+		<script src="assets/javascripts/tables/examples.datatables.default.js"></script>
+		<script src="assets/javascripts/tables/examples.datatables.row.with.details.js"></script>
+		<script src="assets/javascripts/tables/examples.datatables.tabletools.js"></script>	
+
 	</body>
 </html>

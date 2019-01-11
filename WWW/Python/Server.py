@@ -13,10 +13,8 @@ import hashlib
 app = Bottle()
 
 # Connecting to databases
-connectionUsers = sqlite3.connect("usersDatabase.db")
-cUsers = connectionUsers.cursor()
-connectionMovies = sqlite3.connect("main_database.db")
-cMovies = connectionMovies.cursor()
+connection = sqlite3.connect("main_database.db")
+c = connection.cursor()
 
 @app.route('/assets/:path#.+#', name='assets')
 def static(path):
@@ -24,7 +22,7 @@ def static(path):
 
 @app.route('/')
 def index():
-    return template('base')
+    return template('index')
 
 @app.route('/SignUp')
 def signup():
@@ -36,7 +34,30 @@ def signin():
 
 @app.route('/myMovies')
 def mymovies():
-    return template('My_movies')
+    wishlist = request.query.add_wishlist
+    username_cookie = request.get_cookie("account", secret="guacamole")
+
+    if username_cookie == "":
+        redirect('/SignIn')
+
+    if wishlist != "":
+        c.execute("SELECT id FROM movie_database_c WHERE title = (?)", (wishlist,))
+        movie_ID = c.fetchone()
+
+        c.execute("SELECT user_id FROM users WHERE username = (?)", (username_cookie,))
+        user_ID = c.fetchone()
+
+        c.execute("SELECT Wishlist_ID FROM Wishlist WHERE Movie_ID = (?) AND User_ID = (?)", (movie_ID[0],user_ID[0]))
+        Wishlist_ID = c.fetchone()
+        if Wishlist_ID == None:
+            c.execute("INSERT INTO Wishlist VALUES (?,?,?)", (None,int(movie_ID[0]),int(user_ID[0])))
+            connection.commit()
+         
+    c.execute("SELECT DISTINCT m.title, m.genres, m.vote_average, m.vote_count, m.release_date, m.adult FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id WHERE u.username = (?)", (username_cookie,))
+    result = c.fetchall()
+    output = template('My_movies', rows=result)
+    return output
+
 
 @app.route('/Timeline')
 def timeline():
@@ -48,15 +69,17 @@ def certificate():
 
 @app.route('/list_of_movies')
 def listofmovies():
-    cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c LIMIT 5000")
-    result = cMovies.fetchall()
+    c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c LIMIT 5000")
+    result = c.fetchall()
     output = template('list_of_movies', rows=result)
     return output
 
+
+
 @app.route('/Top1000')
 def top1000():
-    cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE vote_count >500 ORDER BY vote_average DESC LIMIT 1000")
-    result = cMovies.fetchall()
+    c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE vote_count >500 ORDER BY vote_average DESC LIMIT 1000")
+    result = c.fetchall()
     output2 = template('top1000', rows=result)
     return output2
 
@@ -76,8 +99,8 @@ def top100y():
             release_year = "19"+release_year
 
 
-        cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE CAST(SUBSTR(release_date,1,4) as int) >= (?) and CAST(SUBSTR(release_date,1,4) as int) < (?)  and vote_count > 100 ORDER BY vote_average DESC LIMIT 100", (int(release_year), (int(release_year)+ 10)))
-        result = cMovies.fetchall()
+        c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE CAST(SUBSTR(release_date,1,4) as int) >= (?) and CAST(SUBSTR(release_date,1,4) as int) < (?)  and vote_count > 100 ORDER BY vote_average DESC LIMIT 100", (int(release_year), (int(release_year)+ 10)))
+        result = c.fetchall()
         output = template('top100year', rows=result,date=release_year + " - " + str(int(release_year)+ 9))
         return output
 
@@ -87,8 +110,8 @@ def top100g():
     genre = request.query.genre
     if genre == "":
 
-        cMovies.execute("SELECT DISTINCT genres FROM movie_database_c")
-        query = cMovies.fetchall()
+        c.execute("SELECT DISTINCT genres FROM movie_database_c")
+        query = c.fetchall()
         result = []
         for tup in query:
             result.append(tup[0])
@@ -96,8 +119,8 @@ def top100g():
         output = template('genres_main_page', rows=result)
         return output
     else:
-        cMovies.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE genres = (?) and vote_count>1000 ORDER BY vote_average DESC LIMIT 100", (genre,))
-        result = cMovies.fetchall()
+        c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE genres = (?) and vote_count>1000 ORDER BY vote_average DESC LIMIT 100", (genre,))
+        result = c.fetchall()
         output = template('top100genre', rows=result)
         return output
 
@@ -113,29 +136,51 @@ def lock():
 def recovery():
     return template('pages-recover-password')
 
+@app.route('/Unsuccessful')
+def incorrect():
+    return template('unsuccessful_singin')
+
 #######SINGING IN##############################
 #Signing In 
 @app.route('/SignIn', method='POST')
 def do_login():
+
     username = request.forms.get('username')
     password = request.forms.get('pwd')
     check = check_login(username,password)
     if check == 'ok':
         redirect('/')
     else:
-        redirect('/SignIn')
-        
+        redirect('/Unsuccessful')   
+
+@app.route('/Unsuccessful', method='POST')
+def do_login():
+
+    username = request.forms.get('username')
+    password = request.forms.get('pwd')
+    check = check_login(username,password)
+    if check == 'ok':
+        redirect('/')
+    else:
+        redirect('/Unsuccessful')   
 
 def check_login(username,password):
     # Login is "admin", password is "password"
     # To-do: catch exceptions (wrong password, wrong username etc.)
     # lowercase all usernames
     
-    cUsers.execute("SELECT password_hash FROM users WHERE username =?", (username,))
-    query = cUsers.fetchone()[0]
-    passwordHash = hashlib.md5(password.encode("utf8")).hexdigest() 
+    c.execute("SELECT password_hash FROM users WHERE username =?", (username,))
+    
+    query = c.fetchone()
+    
+    if query==None:
+        return 'not valid'
+    else:
+        query = query[0]
+        passwordHash = hashlib.md5(password.encode("utf8")).hexdigest() 
 
     if passwordHash == query:
+        response.set_cookie("account", username, secret="guacamole")
         return 'ok'
     else:
         return 'not valid'
@@ -149,7 +194,7 @@ def registerUser():
     password = request.forms.get('pwd')
     passwordHash = hashlib.md5(password.encode("utf8")).hexdigest() 
 
-    cUsers.execute("INSERT INTO users VALUES (?,?,?,?,?)", (None,username,passwordHash,email,None))
-    connectionUsers.commit()
+    c.execute("INSERT INTO users VALUES (?,?,?,?,?)", (None,username,passwordHash,email,None))
+    connection.commit()
 
 app.run(host='localhost', port=8585, debug=True, reloader=True)

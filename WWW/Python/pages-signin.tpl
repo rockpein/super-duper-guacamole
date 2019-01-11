@@ -63,7 +63,7 @@
 							<div class="form-group mb-lg">
 								<div class="clearfix">
 									<label class="pull-left">Password</label>
-									<a href="/Recovery" class="pull-right">Lost Password?</a>
+									
 								</div>
 								<div class="input-group input-group-icon">
 									<input name="pwd" type="password" class="form-control input-lg" />
@@ -77,10 +77,8 @@
 
 							<div class="row">
 								<div class="col-sm-8">
-									<div class="checkbox-custom checkbox-default">
-										<input id="RememberMe" name="rememberme" type="checkbox"/>
-										<label for="RememberMe">Remember Me</label>
-									</div>
+								<p><p class="">Don't have an account yet? <a href="/SignUp">Sign Up!</a></p>
+
 								</div>
 								<div class="row">
 									<div class="center text-right">
@@ -90,8 +88,7 @@
 								</div>
 							</div>
 
-							<p><p class="text-center">Don't have an account yet? <a href="/SignUp">Sign Up!</a></p>
-
+							
 						</form>
 					</div>
 				</div>

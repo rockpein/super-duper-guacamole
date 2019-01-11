@@ -1,0 +1,11 @@
+.wishlist_add
+{
+border-style:none !important;
+background-color: #ffffff;
+box-shadow: 0 0px 10px 0 rgba(0,0,0,0.1) !important;
+text-color: 
+}
+
+.fa-user::before {
+    content: "\f006" !important;
+}
