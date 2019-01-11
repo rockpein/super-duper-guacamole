@@ -41,19 +41,24 @@
 							<th class="center">Votes</th>
 							<th class="center">Release Date</th>
 							<th class="center">Adults</th>
-							<th class="center">Wishlist </th>
+							<th class="center">Watchlist </th>
 						</tr>
 					</thead>
 					<tbody>
-						%for row in rows:
+						%for row in rows[1:]:
 						<tr>
-						
-							%for col in row:
+							
+							<td class="center"><button onClick="window.location.href='/Movie?movie_title={{row[0]}}'" class="wishlist_add">{{row[0]}}</button></td>
+							
+							%for col in row[1:]:
 							<td class="center">{{col}}</td>
 							%end
-							<td class="center"><button onClick="window.location.href='/myMovies?add_wishlist={{row[0]}}'" class="wishlist_add">Add</button></td>
+
+							<td class="center"><button onClick="window.location.href='/myMovies?add_wishlist={{row[0]}}'" class="wishlist_add">Add +</button></td>
+							
 						</tr>
 						%end
+						
 					</tbody>
 				</table>
 			</div>

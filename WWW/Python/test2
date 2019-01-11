@@ -1,8 +1,7 @@
 import sqlite3
+connection = sqlite3.connect("main_database.db")
+c = connection.cursor()
 
-connectionMovies = sqlite3.connect("main_database.db")
-cMovies = connectionMovies.cursor()
-
-cMovies.execute("SELECT title, genres, vote_average, vote_count, adult FROM movie_database_c WHERE release_date = (?) and vote_count > 1000 ORDER BY vote_average DESC LIMIT 100", (int(release_year),))
-result = cMovies.fetchall()
-print(result)
+c.execute("SELECT DISTINCT m.title FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id")
+result = c.fetchall()[1]
+print(result[-1])

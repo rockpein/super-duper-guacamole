@@ -97,13 +97,24 @@
 									<span class="pull-right label label-default">2</span>
 									Actions
 								</div>
+								<%import sqlite3
+											connection = sqlite3.connect("main_database.db")
+											c = connection.cursor()
+											c.execute("SELECT Wishlist_ID FROM Wishlist")
+ 											id = c.fetchall()
+   											number = (len(id)/5000)*100
+
+											c.execute("SELECT DISTINCT m.title FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id")
+											recently_watched = c.fetchall()[1]
+											
+								%>
 			
 								<div class="content">
 									<ul>
 										<li>
 											<p class="clearfix mb-xs">
 												<span class="message pull-left">Recently Watched</span>
-												<span class="message pull-right text-dark">Matrix</span>
+												<span class="message pull-right text-dark">{{recently_watched[-1]}}</span>
 											</p>
 											<div class="progress progress-xs light">
 												<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
@@ -113,11 +124,13 @@
 										<li>
 											<p class="clearfix mb-xs">
 												<span class="message pull-left">Progress</span>
-												<span class="message pull-right text-dark">20%</span>
+												<span class="message pull-right text-dark">{{number}} %</span>
+												
 											</p>
 											<div class="progress progress-xs light">
-												<div class="progress-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"></div>
+												<div class="progress-bar" role="progressbar" aria-valuenow="100-{{number}}" aria-valuemin="0" aria-valuemax="100" style="width: {{number}}%;"></div>
 											</div>
+											
 										</li>
 		
 									</ul>
