@@ -327,6 +327,13 @@
       <script src="assets/javascripts/tables/examples.datatables.default.js"></script>
       <script src="assets/javascripts/tables/examples.datatables.row.with.details.js"></script>
       <script src="assets/javascripts/tables/examples.datatables.tabletools.js"></script>	
+
+      <script>
+         $('#datatable-default-order').DataTable( {
+            "order": [[ 2, "desc" ]]
+         } );
+
+</script>
    </body>
 </html>
 
