@@ -47,7 +47,7 @@
 						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
 					</div>
 					<div class="panel-body">
-						<form action="/SignIn" method="post">
+						<form action="/sign-in" method="post">
 							<div class="form-group mb-lg">
 								<div><label style="color:red;">Incorrect Password!</label></div>
 								<label>Username</label>
@@ -77,7 +77,7 @@
 
 							<div class="row">
 								<div class="col-sm-8">
-								<p><p class="">Don't have an account yet? <a href="/SignUp">Sign Up!</a></p>
+								<p><p class="">Don't have an account yet? <a href="/sign-up">Sign Up!</a></p>
 								</div>
 								<div class="row">
 									<div class="center text-right">
