@@ -45,7 +45,7 @@
                %for col in row[1:]:
                <td class="center">{{col}}</td>
                %end
-               <td class="center"><button onClick="window.location.href='/my-movies?remove_wishlist={{row[0]}}'" class="wishlist_remove">Remove -</button></td>
+               <td class="center"><a href="/my-movies?remove_wishlist={{row[0]}}" class="wishlist_remove">Remove -</button></td>
             </tr>
             %end
          </tbody>

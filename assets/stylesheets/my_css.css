@@ -6,6 +6,15 @@
     border-radius: .25rem;
     box-shadow: 0 0px 10px 0 rgba(0,0,0,0.1) !important;
     color: white;
+    padding: 1px 10px;
+}
+
+.wishlist_add:hover
+{
+    background-color: #218838;
+    border: 1px solid #218838;
+    color: white !important;
+    text-decoration: none !important;
 }
 
 .wishlist_remove
@@ -16,7 +25,17 @@
     border-radius: .25rem;
     box-shadow: 0 0px 10px 0 rgba(0,0,0,0.1) !important;
     color: white;
+    padding: 1px 10px;
 }
+
+.wishlist_remove:hover
+{
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
+    color: white !important;
+    text-decoration: none !important;
+}
+
 .fa-user::before {
     content: "\f006" !important;
 }

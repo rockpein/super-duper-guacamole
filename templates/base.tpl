@@ -87,6 +87,7 @@
                            
                            c2.execute("SELECT DISTINCT m.title, m.genres, m.vote_average, m.vote_count, m.release_date, m.adult FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id WHERE u.username = (?) ORDER BY w.Wishlist_ID DESC", (username_cookie,))
                            recently_watched = c2.fetchone()
+                           connection2.close()
                            %>
 
                            %if recently_watched != None:
