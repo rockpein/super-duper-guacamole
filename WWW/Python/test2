@@ -1,7 +1,0 @@
-import sqlite3
-connection = sqlite3.connect("main_database.db")
-c = connection.cursor()
-
-c.execute("SELECT DISTINCT m.title FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id")
-result = c.fetchall()[1]
-print(result[-1])
