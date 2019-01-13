@@ -1,11 +1,22 @@
 .wishlist_add
 {
-border-style:none !important;
-background-color: #ffffff;
-box-shadow: 0 0px 10px 0 rgba(0,0,0,0.1) !important;
-text-color: 
+    border-style:none !important;
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    border-radius: .25rem;
+    box-shadow: 0 0px 10px 0 rgba(0,0,0,0.1) !important;
+    color: white;
 }
 
+.wishlist_remove
+{
+    border-style:none !important;
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: .25rem;
+    box-shadow: 0 0px 10px 0 rgba(0,0,0,0.1) !important;
+    color: white;
+}
 .fa-user::before {
     content: "\f006" !important;
 }
