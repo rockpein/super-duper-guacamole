@@ -1,4 +1,13 @@
 % rebase('templates/base.tpl')
+<style>
+   .widget-summary-col{
+      vertical-align: middle !important;
+   }
+
+   .summary{
+      min-height: 0px !important;
+   }
+</style>
 <section role="main" class="content-body">
 <header class="page-header">
    <h2>Dashboard</h2>
@@ -25,11 +34,11 @@
                      <i class="fa fa-key"></i>
                   </div>
                </div>
-               <div class="widget-summary-col center-block">
-                  <div class="summary ">
+               <div class="widget-summary-col">
+                  <div class="summary center">
                      <h4 class="title"></h4>
                      <div class="info center-block">
-                        <div style="padding-top:25% !important">
+                        <div>
                            <a href="/sign-in"><strong class="amount">Sign In</strong></a>
                         </div>
                      </div>
@@ -51,10 +60,10 @@
                   </div>
                </div>
                <div class="widget-summary-col">
-                  <div class="summary">
+                  <div class="summary center">
                      <h4 class="title"></h4>
                      <div class="info">
-                        <div style="padding-top:8% !important">
+                        <div>
                            <a href="/my-movies"><strong class="amount">Watchlist</strong></a>
                         </div>
                      </div>
@@ -76,10 +85,10 @@
                   </div>
                </div>
                <div class="widget-summary-col">
-                  <div class="summary">
+                  <div class="summary center">
                      <h4 class="title"></h4>
                      <div class="info">
-                        <div style="padding-top:25% !important">
+                        <div>
                            <a href="/sign-up"><strong class="amount">Sign Up</strong></a>
                         </div>
                      </div>
@@ -101,10 +110,10 @@
                   </div>
                </div>
                <div class="widget-summary-col">
-                  <div class="summary">
+                  <div class="summary center">
                      <h4 class="title"></h4>
                      <div class="info">
-                        <div style="padding-top:3% !important">
+                        <div>
                            <a href="/list-of-movies"><strong class="amount">All Movies</strong></a>
                         </div>
                      </div>
@@ -126,10 +135,10 @@
                   </div>
                </div>
                <div class="widget-summary-col">
-                  <div class="summary">
+                  <div class="summary center">
                      <h4 class="title"></h4>
                      <div class="info">
-                        <div style="padding-top:15% !important">
+                        <div>
                            <a href="/top-1000"><strong class="amount">Top 1000</strong></a>
                         </div>
                      </div>
@@ -151,10 +160,10 @@
                   </div>
                </div>
                <div class="widget-summary-col">
-                  <div class="summary">
+                  <div class="summary center">
                      <h4 class="title"></h4>
                      <div class="info">
-                        <div style="padding-top:15% !important">
+                        <div>
                            <a href="top-100-by-genre"><strong class="amount">By Genre</strong></a>
                         </div>
                      </div>
@@ -176,10 +185,10 @@
                </div>
             </div>
             <div class="widget-summary-col">
-               <div class="summary">
+               <div class="summary center">
                   <h4 class="title"></h4>
                   <div class="info">
-                     <div style="padding-top:15% !important">
+                     <div>
                         <a href="/top-100-by-year"><strong class="amount">By Year</strong></a>
                      </div>
                   </div>
