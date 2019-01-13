@@ -190,5 +190,7 @@ def registerUser():
     passwordHash = hashlib.md5(password.encode("utf8")).hexdigest() 
     c.execute("INSERT INTO users VALUES (?,?,?,?,?)", (None,username,passwordHash,email,None))
     connection.commit()
+    response.set_cookie("account", username, secret="guacamole")
+    redirect('/')
 
 app.run(host='localhost', port=8585, debug=True, reloader=True)
