@@ -81,7 +81,7 @@
                            username_cookie = request.get_cookie("account", secret="guacamole")
                            connection2 = sqlite3.connect("data/main_database.db")
                            c2 = connection2.cursor()
-                           c2.execute("SELECT Wishlist_ID FROM Wishlist")
+                           c2.execute("SELECT DISTINCT w.Wishlist_ID FROM Wishlist AS w, users AS u JOIN Wishlist users ON w.USER_ID = u.user_id WHERE u.username = (?)",(username_cookie,))
                            id = c2.fetchall()
                            number = (len(id)/5000)*100
                            
@@ -138,9 +138,7 @@
                   <div class="dropdown-menu">
                      <ul class="list-unstyled">
                         <li class="divider"></li>
-                        <li>
-                           <a role="menuitem" tabindex="-1" href="/user-profile"><i class="fa fa-user"></i> My Profile</a>
-                        </li>
+                        
                         <li>
                            <a role="menuitem" tabindex="-1" href="/sign-in?logout=True"><i class="fa fa-power-off"></i> Logout</a>
                         </li>
