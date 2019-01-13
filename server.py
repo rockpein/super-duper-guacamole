@@ -26,14 +26,15 @@ def index():
 
 @app.route('/my-movies')
 def mymovies():
-    wishlist = request.query.add_wishlist
+    addWishlist = request.query.add_wishlist
+    removeWishlist = request.query.remove_wishlist
     username_cookie = request.get_cookie("account", secret="guacamole")
 
     if username_cookie == "":
         redirect('/sign-in')
 
-    if wishlist != "":
-        c.execute("SELECT id FROM movie_database_c WHERE title = (?)", (wishlist,))
+    if addWishlist != "":
+        c.execute("SELECT id FROM movie_database_c WHERE title = (?)", (addWishlist,))
         movie_ID = c.fetchone()
 
         c.execute("SELECT user_id FROM users WHERE username = (?)", (username_cookie,))
@@ -44,7 +45,13 @@ def mymovies():
         if Wishlist_ID == None:
             c.execute("INSERT INTO Wishlist VALUES (?,?,?)", (None,int(movie_ID[0]),int(user_ID[0])))
             connection.commit()
-         
+
+    if removeWishlist != "":
+        c.execute("SELECT id FROM movie_database_c WHERE title = (?)", (removeWishlist,))
+        movie_ID = c.fetchone()
+        c.execute("DELETE FROM Wishlist WHERE Movie_ID = (?)", (movie_ID[0],))
+        connection.commit()
+
     c.execute("SELECT DISTINCT m.title, m.genres, m.vote_average, m.vote_count, m.release_date, m.adult FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id WHERE u.username = (?)", (username_cookie,))
     result = c.fetchall()
     output = template('templates/my_movies', rows=result)

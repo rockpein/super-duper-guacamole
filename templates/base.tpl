@@ -75,23 +75,30 @@
                            <span class="pull-right label label-default">2</span>
                            Actions
                         </div>
-                        <%import sqlite3
-                           connection = sqlite3.connect("data/main_database.db")
-                           c = connection.cursor()
-                           c.execute("SELECT Wishlist_ID FROM Wishlist")
-                           	id = c.fetchall()
-                           			number = (len(id)/5000)*100
+                        <%
+                           from bottle import Bottle, request
+                           import sqlite3
+                           username_cookie = request.get_cookie("account", secret="guacamole")
+                           connection2 = sqlite3.connect("data/main_database.db")
+                           c2 = connection2.cursor()
+                           c2.execute("SELECT Wishlist_ID FROM Wishlist")
+                           id = c2.fetchall()
+                           number = (len(id)/5000)*100
                            
-                           c.execute("SELECT DISTINCT m.title FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id")
-                           recently_watched = c.fetchall()[1]
-                           
+                           c2.execute("SELECT DISTINCT m.title, m.genres, m.vote_average, m.vote_count, m.release_date, m.adult FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id WHERE u.username = (?) ORDER BY w.Wishlist_ID DESC", (username_cookie,))
+                           recently_watched = c2.fetchone()
                            %>
+
+                           %if recently_watched != None:
+                              %recently_watched = recently_watched[0]
+                           %end
+                           
                         <div class="content">
                            <ul>
                               <li>
                                  <p class="clearfix mb-xs">
                                     <span class="message pull-left">Recently Watched</span>
-                                    <span class="message pull-right text-dark">{{recently_watched[-1]}}</span>
+                                    <span class="message pull-right text-dark">{{recently_watched}}</span>
                                  </p>
                                  <div class="progress progress-xs light">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
@@ -119,8 +126,6 @@
                      </figure>
                      <div class="profile-info">
                         <span class="name">Intro to Python&SQL</span>
-                        %from bottle import Bottle, request
-                        %username_cookie = request.get_cookie("account", secret="guacamole")
                         %if username_cookie == "":
                         <span class="role">Data Science</span>
                         %else:

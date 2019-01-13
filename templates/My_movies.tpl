@@ -35,14 +35,17 @@
                <th class="center">Votes</th>
                <th class="center">Release Date</th>
                <th class="center">Adults</th>
+               <th class="center">Remove from watchlist</th>
             </tr>
          </thead>
          <tbody>
             %for row in rows:
             <tr>
-               %for col in row:
+               <td class="center"><a href="movie?movie_title={{row[0]}}">{{row[0]}}</a></td>
+               %for col in row[1:]:
                <td class="center">{{col}}</td>
                %end
+               <td class="center"><button onClick="window.location.href='/my-movies?remove_wishlist={{row[0]}}'" class="wishlist_add">Remove -</button></td>
             </tr>
             %end
          </tbody>
