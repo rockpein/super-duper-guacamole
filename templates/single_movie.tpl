@@ -18,19 +18,18 @@
    <div class="col-md-4 col-lg-3">
       <section class="panel">
          <div class="panel-body">
-            <div class="thumb-info mb-md">
+            <div class="thumb-info  mb-md">
                <img src="https://image.tmdb.org/t/p/w1280{{data[0]}}" class="rounded img-responsive" alt="Python&SQL">
-               <div class="thumb-info-title">
-               </div>
             </div>
             <hr class="dotted short">
-            <h6 class="text-muted">Tagline</h6>
-            <p>{{data[1]}}</p>
+            <h6 class="text-muted">Status</h6>
+            <p>{{data[11]}}</p>
          </div>
       </section>
    </div>
    <div class="col-md-8 col-lg-6">
-      <h2 class="mb-xlg center">{{data[2]}}</h2>
+      <h1 class="mb-lg center">{{data[2]}}</h1>
+      <h4 class="mb-xlg center">{{data[1]}}</h4>
       <div class="tabs">
          <ul class="nav nav-tabs tabs-primary">
          </ul>
@@ -88,10 +87,12 @@
             <h3>{{data[10]}} min</h3>
             <p>Runtime</p>
          </li>
+         <!--
          <li class="primary">
             <h3>{{data[11]}}</h3>
             <p>Status</p>
          </li>
+         -->
       </ul>
    </div>
 </div>
