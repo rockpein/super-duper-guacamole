@@ -67,6 +67,9 @@
    <div class="col-md-12 col-lg-3">
       <h4 class="mb-md"></h4>
       <ul class="simple-card-list mb-xlg">
+         <li class="primary" style="background:#37C342;">
+            <h3 class="center"><a href="/my-movies?add_wishlist={{data[2]}}" role="button" style="color:white;">Add to Watchlist</a></h3>
+         </li>
          <li class="primary">
             <h3>{{data[6]}}</h3>
             <p>Vote Average</p>
