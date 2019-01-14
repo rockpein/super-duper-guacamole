@@ -138,10 +138,18 @@
                   <div class="dropdown-menu">
                      <ul class="list-unstyled">
                         <li class="divider"></li>
-                        
-                        <li>
-                           <a role="menuitem" tabindex="-1" href="/sign-in?logout=True"><i class="fa fa-power-off"></i> Logout</a>
-                        </li>
+                        %if username_cookie == None:
+                           <li>
+                              <a role="menuitem" tabindex="-1" href="/sign-up"><i class="fa fa-pencil"></i>   Create account</a>
+                           </li>
+                           <li>
+                              <a role="menuitem" tabindex="-1" href="/sign-in"><i class="fa fa-key"></i>   Log in</a>
+                           </li>
+                        %else:  
+                           <li>
+                              <a role="menuitem" tabindex="-1" href="/sign-in?logout=True"><i class="fa fa-power-off"></i>   Logout</a>
+                           </li>
+                        %end
                      </ul>
                   </div>
                </div>
