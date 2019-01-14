@@ -37,7 +37,8 @@ def mymovies():
     removeWishlist = request.query.remove_wishlist
     username_cookie = request.get_cookie("account", secret="guacamole")
 
-    if username_cookie == "":
+
+    if username_cookie == None:
         redirect('/sign-in')
 
     if addWishlist != "":
@@ -157,16 +158,6 @@ def do_login():
         redirect('/')
     else:
         redirect('/sign-in?unsuccessful=True')   
-
-@app.route('/unsuccessful', method='POST')
-def do_login():
-    username = request.forms.get('username')
-    password = request.forms.get('pwd')
-    check = check_login(username,password)
-    if check == 'ok':
-        redirect('/')
-    else:
-        redirect('/unsuccessful')   
 
 def check_login(username,password):
     # Login is "admin", password is "password"
