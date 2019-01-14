@@ -147,7 +147,7 @@
                            </li>
                         %else:  
                            <li>
-                              <a role="menuitem" tabindex="-1" href="/sign-in?logout=True"><i class="fa fa-power-off"></i>   Logout</a>
+                              <a role="menuitem" tabindex="-1" href="/sign-in?logout=true"><i class="fa fa-power-off"></i>   Logout</a>
                            </li>
                         %end
                      </ul>
@@ -177,6 +177,8 @@
                            <span>User</span>
                            </a>
                            <ul class="nav nav-children">
+
+                           %if username_cookie == None:
                               <li>
                                  <a href="/sign-up">
                                  Sign Up
@@ -187,11 +189,18 @@
                                  Sign In
                                  </a>
                               </li>
+                           %else:
                               <li>
                                  <a href="/my-movies">
                                  My Watchlist
                                  </a>
                               </li>
+                              <li>
+                                 <a href="/sign-in?logout=true">
+                                 Logout
+                                 </a>
+                              </li>
+                           %end
                            </ul>
                         </li>
                         <li class="nav-parent">

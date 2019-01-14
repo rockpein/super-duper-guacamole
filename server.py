@@ -63,7 +63,7 @@ def mymovies():
 
     c.execute("SELECT DISTINCT m.title, m.genres, m.vote_average, m.vote_count, m.release_date, m.adult FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id WHERE u.username = (?)", (username_cookie,))
     result = c.fetchall()
-    output = template('templates/my_movies', rows=result)
+    output = template('templates/my_watchlist', rows=result)
     return output
 
 @app.route('/list-of-movies')
@@ -118,14 +118,14 @@ def top100g():
 @app.route('/movie')
 def single_movie():
     movieTitle = request.query.movie_title
-    if movieTitle == "":
+    if movieTitle  == "":
         redirect('/')
-    else:
-        #To-do: size of letters
-        c.execute("SELECT poster_path, tagline, title, overview, revenue, budget, vote_average, vote_count, release_date, genres, runtime, [status] FROM movie_database_c WHERE title = (?) LIMIT 1", (movieTitle, ))
-        result = c.fetchone()
-        output = template('templates/single_movie', data = result)
-        return output
+
+    #To-do: size of letters
+    c.execute("SELECT poster_path, tagline, title, overview, revenue, budget, vote_average, vote_count, release_date, genres, runtime, [status] FROM movie_database_c WHERE title = (?) LIMIT 1", (movieTitle, ))
+    result = c.fetchone()
+    output = template('templates/single_movie', data = result)
+    return output
 
 @app.route('/user-profile')
 def user():
@@ -133,20 +133,18 @@ def user():
 
 @app.route('/sign-up')
 def signup():
-    return template('templates/pages-signup')
+    return template('templates/sign_up', warning='')
 
 @app.route('/sign-in')
 def signin():
-    wrongPassword = request.query.unsuccessful
-    logout = request.query.logout
-    if logout != "":
+    if request.query.logout == "true":
         response.delete_cookie("account")
         redirect('/')
     
-    if wrongPassword != "":
-        return template('templates/unsuccessful_singin')
-    else:
-        return template('templates/pages-signin')
+    if request.query.unsuccessful == "true":
+        return template('templates/sign_in', warning='Incorrect Username or Password!')
+
+    return template('templates/sign_in', warning='')
 
 ################SIGNING IN################
 @app.route('/sign-in', method='POST')
@@ -154,10 +152,11 @@ def do_login():
     username = request.forms.get('username')
     password = request.forms.get('pwd')
     check = check_login(username,password)
+
     if check == 'ok':
         redirect('/')
     else:
-        redirect('/sign-in?unsuccessful=True')   
+        redirect('/sign_in?unsuccessful=true')   
 
 def check_login(username,password):
     # Login is "admin", password is "password"
