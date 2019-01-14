@@ -27,28 +27,8 @@ def index():
 
     c.execute("SELECT DISTINCT adult FROM movie_database_c")
     adults = c.fetchall()
-
-    c.execute("SELECT release_date FROM movie_database_c WHERE CAST(SUBSTR(release_date,1,4) as int) and CAST(SUBSTR(release_date,1,4) as int) ")
-    release_date = c.fetchall()
-    release_date = list(release_date)
-    years = []
-    if release_date[-4,-3] == "3":
-        years.append = 30
-    if release_date[-4,-3] == "4":
-        years.append = 40
-    if release_date[-4,-3] == "5":
-        years.append = 50
-    if release_date[-4,-3] == "6":
-        years.append = 60
-    if release_date[-4,-3] == "7":
-        years.append = 70
-    if release_date[-4,-3] == "8":
-        years.append = 80
-    if release_date[-4,-3] == "9":
-        years.append = 90
-    else:
-        year.append = 2000
-    output = template('templates/index', genres=genres, adults=adults, years=years, title= "Main Page")
+    
+    output = template('templates/index', genres=genres, adults=adults, title= "Main Page")
     return output
 
 @app.route('/my-movies')

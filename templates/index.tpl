@@ -53,18 +53,15 @@
             </select>
          </div>
          <div class="form-group col-xs-3">
-         <script>
-         $(function()
-         {
-         $(".js-example-basic-multiple").select2();
-         });
-         </script>
-           <!-- <select data-filter="type" class="filter-type filter form-control"> -->
-            <select class="filter-type filter form-control">
+            <select data-filter="type" class="filter-type filter form-control">
                <option value="">Select Rating</option>
-               %for year in years:
-               <option input value="" type="checkbox">{{str(years)}}*</option>
-               %end
+               <option input value="" type="checkbox">0-2 (*)</option>
+               <option input value="" type="checkbox">2-5 (*)</option>
+               <option input value="" type="checkbox">5-6 (**)</option>
+               <option input value="" type="checkbox">6-7 (**)</option>
+               <option input value="" type="checkbox">7-8 (***)</option>
+               <option input value="" type="checkbox">8-9 (***)</option>
+               <option input value="" type="checkbox">9-10 (***)</option>
             </select>
          </div>
          <div class="form-group col-xs-3">
