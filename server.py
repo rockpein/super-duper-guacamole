@@ -22,7 +22,14 @@ def static(path):
 
 @app.route('/')
 def index():
-    return template('templates/index')
+    c.execute("SELECT DISTINCT genres FROM movie_database_c")
+    genres = c.fetchall()
+
+    c.execute("SELECT DISTINCT adult FROM movie_database_c")
+    adults = c.fetchall()
+    
+    output = template('templates/index', genres=genres, adults=adults, title= "Main Page")
+    return output
 
 @app.route('/my-movies')
 def mymovies():

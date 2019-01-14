@@ -24,7 +24,60 @@
    </div>
 </header>
 <section class="panel">
-<section class="panel">
+   <div class="row" id="search">
+      <form id="search-form" action="" method="POST" enctype="multipart/form-data">
+         <div class="form-group col-xs-9">
+            <input class="form-control" type="text" placeholder="Search" />
+         </div>
+         <div class="form-group col-xs-3">
+            <button type="submit" class="btn btn-block btn-primary">Search</button>
+         </div>
+      </form>
+   </div>
+   <div class="row" id="filter">
+      <form>
+         <div class="form-group col-xs-3">
+            <select data-filter="make" class="filter-make filter form-control">
+               <option value="">Select Genre</option>
+            %for genre in genres[:]:
+               <option value="">{{str(genre)[2:-3]}}</option>
+            %end  
+            </select>
+         </div>
+         <div class="form-group col-xs-3">
+            <select data-filter="model" class="filter-model filter form-control">
+               <option value="">For Adults</option>
+               %for adult in adults:
+               <option value="">{{str(adult)[2:-3]}}</option>
+               %end
+            </select>
+         </div>
+         <div class="form-group col-xs-3">
+            <select data-filter="type" class="filter-type filter form-control">
+               <option value="">Select Rating</option>
+               <option input value="" type="checkbox">0-2 (*)</option>
+               <option input value="" type="checkbox">2-5 (*)</option>
+               <option input value="" type="checkbox">5-6 (**)</option>
+               <option input value="" type="checkbox">6-7 (**)</option>
+               <option input value="" type="checkbox">7-8 (***)</option>
+               <option input value="" type="checkbox">8-9 (***)</option>
+               <option input value="" type="checkbox">9-10 (***)</option>
+            </select>
+         </div>
+         <div class="form-group col-xs-3">
+            <select data-filter="price" class="filter-price filter form-control">
+               <option value="">Release Date</option>
+               <option value="">1930-1950</option>
+               <option value="">1950-1970</option>
+               <option value="">1970-1990</option>
+               <option value="">1990-2010</option>
+               <option value="">2010+</option>
+            </select>
+         </div>
+      </form>
+   </div>
+</section>   	
+<section class="poor">
    <div class="col-xs-3">
       <section class="panel panel-featured-left panel-featured-quartenary">
          <div class="panel-body">
@@ -48,7 +101,7 @@
          </div>
       </section>
    </div>
-</section>
+</section> 
 <section class="panel">
    <div class="col-xs-6">
       <section class="panel panel-featured-left panel-featured-quartenary">
