@@ -61,7 +61,11 @@ def mymovies():
             c.execute("DELETE FROM Wishlist WHERE Movie_ID = (?)", (movie_ID[0],))
             connection.commit()
 
-    c.execute("SELECT DISTINCT m.title, m.genres, m.vote_average, m.vote_count, m.release_date, m.adult FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id JOIN Wishlist users ON w.USER_ID = u.user_id WHERE u.username = (?)", (username_cookie,))
+    c.execute('''SELECT DISTINCT m.title, m.genres, m.vote_average, m.vote_count, m.release_date, m.adult 
+    FROM movie_database_c AS m, Wishlist AS w, users AS u JOIN Wishlist movie_database_c ON w.Movie_ID = m.id 
+    JOIN Wishlist users ON w.USER_ID = u.user_id 
+    WHERE u.username = (?)''', (username_cookie,))
+
     result = c.fetchall()
     output = template('templates/my_watchlist', rows=result)
     return output
@@ -75,7 +79,11 @@ def listofmovies():
 
 @app.route('/top-1000')
 def top1000():
-    c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE vote_count >500 ORDER BY vote_average DESC LIMIT 1000")
+    c.execute('''SELECT title, genres, vote_average, vote_count, release_date, adult 
+    FROM movie_database_c 
+    WHERE vote_count >500 
+    ORDER BY vote_average 
+    DESC LIMIT 1000''')
     result = c.fetchall()
     output = template('templates/movie_table', rows=result, title= "Top 1000 Movies")
     return output
@@ -92,7 +100,12 @@ def top100y():
             release_year = "20"+release_year
         else:
             release_year = "19"+release_year
-        c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE CAST(SUBSTR(release_date,1,4) as int) >= (?) and CAST(SUBSTR(release_date,1,4) as int) < (?)  and vote_count > 100 ORDER BY vote_average DESC LIMIT 100", (int(release_year), (int(release_year)+ 10)))
+        c.execute('''SELECT title, genres, vote_average, vote_count, release_date, adult 
+        FROM movie_database_c 
+        WHERE CAST(SUBSTR(release_date,1,4) as int) >= (?) and CAST(SUBSTR(release_date,1,4) as int) < (?)  and vote_count > 100 
+        ORDER BY vote_average 
+        DESC LIMIT 100''', (int(release_year), (int(release_year)+ 10)))
+
         result = c.fetchall()
         output = template('templates/movie_table', rows=result, title= "Top 100 Movies from " + release_year + " to " + str(int(release_year)+ 9))
         return output
@@ -110,19 +123,66 @@ def top100g():
         output = template('templates/genres_main_page', rows=result)
         return output
     else:
-        c.execute("SELECT title, genres, vote_average, vote_count, release_date, adult FROM movie_database_c WHERE genres = (?) and vote_count>1000 ORDER BY vote_average DESC LIMIT 100", (genre,))
+        c.execute('''SELECT title, genres, vote_average, vote_count, release_date, adult 
+        FROM movie_database_c 
+        WHERE genres = (?) and vote_count>1000 
+        ORDER BY vote_average 
+        DESC LIMIT 100''', (genre,))
+
         result = c.fetchall()
         output = template('templates/movie_table', rows=result, title= "Top 100 Movies by Genre")
         return output
 
+@app.route('/search')
+def search():
+
+    title = request.query.title
+    genre = request.query.genre 
+    adult = request.query.adult
+    rating = request.query.rating
+    date = request.query.date
+
+    if title=="":
+        title = ""  
+    if genre=="":
+        genre = ""
+    if adult=="":
+        adult = ""
+    if date=="":
+        date = 1900
+        date_end = 2020
+    else:
+        date_end = int(date)+20
+    if rating=="":
+        rating = 0
+        rating_end = 10
+    else:
+        rating_end = int(rating)+2
+
+    c.execute('''SELECT title, genres, vote_average, vote_count, release_date, adult 
+    FROM movie_database_c 
+    WHERE title LIKE '%' || (?) || '%'
+    AND genres LIKE '%' || (?) || '%'
+    AND adult LIKE '%' || (?) || '%'
+    AND CAST(SUBSTR(release_date,1,4) as int) BETWEEN (?) AND (?)
+    AND CAST(SUBSTR(vote_average,1) as int) BETWEEN (?) AND (?)
+    ORDER BY vote_average 
+    DESC LIMIT 100''',(title,genre,adult,date,date_end,rating,rating_end))
+
+    result = c.fetchall()
+    output = template('templates/movie_table', rows=result, title= "Search")
+    return output
+
 @app.route('/movie')
 def single_movie():
     movieTitle = request.query.movie_title
-    if movieTitle  == "":
+    if movieTitle  == None:
         redirect('/')
 
     #To-do: size of letters
-    c.execute("SELECT poster_path, tagline, title, overview, revenue, budget, vote_average, vote_count, release_date, genres, runtime, [status] FROM movie_database_c WHERE title = (?) LIMIT 1", (movieTitle, ))
+    c.execute('''SELECT poster_path, tagline, title, overview, revenue, budget, vote_average, vote_count, release_date, genres, runtime, [status] 
+    FROM movie_database_c 
+    WHERE title = (?) LIMIT 1''', (movieTitle, ))
     result = c.fetchone()
     output = template('templates/single_movie', data = result)
     return output
@@ -156,7 +216,7 @@ def do_login():
     if check == 'ok':
         redirect('/')
     else:
-        redirect('/sign_in?unsuccessful=true')   
+        redirect('/sign-in?unsuccessful=true')   
 
 def check_login(username,password):
     # Login is "admin", password is "password"
