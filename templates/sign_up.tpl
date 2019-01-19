@@ -41,7 +41,7 @@
                         %if warning != "":
                            <div><label style="color:red;">{{warning}}</label></div>
                         %end
-                        <label>Name</label>
+                        <label>Name </label>
                         <input name="name" type="text" class="form-control input-lg" />
                      </div>
                      <div class="form-group mb-lg">

@@ -38,8 +38,8 @@
          <div class="form-group col-xs-3">
             <select data-filter="make" name="genre" class="filter-make filter form-control">
                <option value="">Select Genre</option>
-            %for genre in genres[:]:
-               <option value="{{str(genre)[2:-3]}}">{{str(genre)[2:-3]}}</option>
+            %for genre in genres:
+               <option value="{{genre[0]}}">{{genre[0]}}</option>
             %end  
             </select>
          </div>
@@ -47,7 +47,7 @@
             <select data-filter="model" name="adult" class="filter-model filter form-control">
                <option value="">For Adults</option>
                %for adult in adults:
-               <option value="{{str(adult)[2:-3]}}">{{str(adult)[2:-3]}}</option>
+               <option value="{{adult}}">{{adult}}</option>
                %end
             </select>
          </div>
