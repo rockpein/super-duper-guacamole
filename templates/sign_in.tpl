@@ -41,6 +41,7 @@
                         %if warning != "":
                            <div><label style="color:red;">{{warning}}</label></div>
                         %end
+                        <div><label style='color: grey;'>To test, log into <em>admin</em> using <em>password</em></label></div>
                         <label>Username</label>
                         <div class="input-group input-group-icon">
                            <input name="username" type="text" class="form-control input-lg" />
@@ -98,5 +99,4 @@
       <!-- Theme Initialization Files -->
       <script src="assets/javascripts/theme.init.js"></script>
    </body>
-   <img src="http://www.ten28.com/fref.jpg">
 </html>

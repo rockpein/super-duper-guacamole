@@ -269,7 +269,7 @@ def search():
             (?) AND (?)
         ORDER BY 
             vote_average DESC
-        LIMIT 100''',(title,genre,adult,date,date_end,rating,rating_end))
+        LIMIT 100''',(title,genre,adult,int(date),int(date_end),int(rating),int(rating_end)))
 
     result = c.fetchall()
     output = template('templates/movie_table', rows=result, title= "Search")

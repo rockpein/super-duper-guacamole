@@ -1,0 +1,2 @@
+# Required libraries for super-duper-guacamole
+bottle>=0.12

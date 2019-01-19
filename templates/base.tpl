@@ -6,7 +6,7 @@
       <meta http-equiv="content-language" content="pl" />
       <meta name="robots" content="index, follow" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>Movies: Python Searching Engine</title>
+      <title>Movies in Python</title>
       <meta name="keywords" content="" />
       <meta name="description" content="">
       <meta name="author" content="Michał Szałański, Korneliusz Krysiak">
