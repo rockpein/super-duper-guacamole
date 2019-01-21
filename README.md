@@ -1,5 +1,5 @@
 # super-duper-guacamole
-This is a Python project by Kornel Krysiak and Micha≥ Sza≥aÒski.
+This is a Python project by Kornel Krysiak and Micha≈Ç Sza≈Ça≈Ñski.
 
 ### Credits
  - Database: [The Movies Dataset | Kaggle](https://www.kaggle.com/rounakbanik/the-movies-dataset)
